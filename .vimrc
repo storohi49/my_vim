@@ -1,7 +1,7 @@
 syntax enable
 set background=dark "デフォルトのbackgroundのカラーテーマを設定。lightの場合はlight
-colorscheme solarized
-let g:solarized_termcolors=256
+"colorscheme solarized
+"let g:solarized_termcolors=256
 
 " ファイルを上書きする前にバックアップを作ることを無効化
 set nowritebackup
@@ -156,7 +156,8 @@ nnoremap <silent><C-n> :NERDTreeToggle<CR>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 
 "ここからdeoplete本体
 Plug 'Shougo/deoplete.nvim'
@@ -186,9 +187,20 @@ if !has('gui_running')
   set t_Co=256
 endif
 
+
 let NERDTreeShowHidden = 1
 
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '~'
+
+
+colorscheme solarized
+let g:solarized_termcolors=256
+
+if argc() == 0 || argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+    autocmd vimenter * NERDTree
+else
+    autocmd vimenter * NERDTree | wincmd p
+endif
 
 
